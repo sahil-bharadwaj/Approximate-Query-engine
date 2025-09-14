@@ -1,5 +1,6 @@
 import os
 import csv
+import pandas as pd
 from sqlalchemy import create_engine, inspect
 
 def load_database(data_path=None, db_uri=None):
@@ -28,3 +29,22 @@ def load_database(data_path=None, db_uri=None):
 
     else:
         raise ValueError("Provide either data_path or db_uri")
+
+def load_databases(data_paths):
+    """
+    Load and combine multiple CSV files into a single DataFrame.
+    data_paths: list of file paths to CSV files.
+    Returns: combined pandas DataFrame.
+    """
+    dfs = []
+    for path in data_paths:
+        try:
+            df = pd.read_csv(path)
+            dfs.append(df)
+        except Exception as e:
+            print(f"Error loading {path}: {e}")
+    if dfs:
+        combined_df = pd.concat(dfs, ignore_index=True)
+        return combined_df
+    else:
+        return pd.DataFrame()  # Return empty DataFrame if nothing loaded

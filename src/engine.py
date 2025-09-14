@@ -1,18 +1,16 @@
-from .data_loader import load_database
-from .query_processor import QueryProcessor
+from src.data_loader import load_databases
 
 class ApproximateQueryEngine:
-    def __init__(self, data_path=None, db_uri=None):
-        if db_uri:
-            self.df = load_database(db_uri=db_uri)
-        elif data_path:
-            self.df = load_database(data_path=data_path)
-        else:
-            raise ValueError("Provide either data_path or db_uri")
-        self.processor = QueryProcessor(self.df)
+    def __init__(self, data_paths):
+        """
+        Initialize the engine with one or more CSV file paths.
+        Combines all CSVs into a single DataFrame.
+        """
+        self.df = load_databases(data_paths)
 
-    def run_query(self, query_type, column, mode='approximate', accuracy=0.1):
-        if mode == 'approximate':
-            return self.processor.approximate_query(query_type, column, accuracy)
-        else:
-            return self.processor.exact_query(query_type, column)
+    def run_query(self, query_func, *args, **kwargs):
+        """
+        Run a query function on the combined DataFrame.
+        query_func: a function that takes a DataFrame and returns a result.
+        """
+        return query_func(self.df, *args, **kwargs)
