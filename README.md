@@ -51,5 +51,5 @@ Detailed documentation is available in the `docs/` folder, including:
 
 
 *For questions or demo requests, contact the maintainer*
-# Approximate-Query-engine
-nikhil bhosdiwala hai
+
+
