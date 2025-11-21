@@ -1,0 +1,13 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - AQE_DB_PATH=/data/aqe.sqlite
+      - PORT=8080
+      - FLASK_ENV=production
+    volumes:
+      - ./data:/data
+    ports:
+      - "8080:8080"
