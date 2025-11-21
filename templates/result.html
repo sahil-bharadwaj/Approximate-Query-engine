@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Query Results | Approximate Query Engine</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6fb;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: 32px 40px;
+        }
+        h1 {
+            text-align: center;
+            color: #2d3a4b;
+            margin-bottom: 32px;
+        }
+        .result-block {
+            background: #eaf6ff;
+            border-left: 4px solid #4a90e2;
+            padding: 24px;
+            margin-top: 24px;
+            border-radius: 8px;
+        }
+        .result-block h2 {
+            color: #4a90e2;
+            margin-top: 0;
+        }
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+        .result-table th, .result-table td {
+            border: 1px solid #dbe2ea;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        .result-table th {
+            background: #f4f6fb;
+            color: #2d3a4b;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 32px;
+            background: #4a90e2;
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .back-btn:hover {
+            background: #357ab8;
+        }
+        @media (max-width: 700px) {
+            .container {
+                padding: 16px 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Query Results</h1>
+        <div class="result-block">
+            <h2>Result</h2>
+            {% if result %}
+                {% if result['result'] is mapping %}
+                    <table class="result-table">
+                        <tr>
+                            <th>Group</th>
+                            <th>Count</th>
+                        </tr>
+                        {% for key, value in result['result'].items() %}
+                        <tr>
+                            <td>{{ key }}</td>
+                            <td>{{ value }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p><strong>Value:</strong> {{ result['result'] }}</p>
+                {% endif %}
+                <p><strong>Time Taken:</strong> {{ result['time_taken'] }} seconds</p>
+            {% else %}
+                <p>No result to display.</p>
+            {% endif %}
+        </div>
+        <a href="/" class="back-btn">Back to Query Page</a>
+    </div>
+</body>
+
+</html>

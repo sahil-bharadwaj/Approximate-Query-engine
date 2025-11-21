@@ -1,3 +1,12 @@
+<<<<<<< HEAD
 Flask>=3.0.0
 Flask-CORS>=4.0.0
 python-dotenv>=1.0.0
+=======
+pandas
+numpy
+pyyaml
+pytest
+flask
+sqlalchemy
+>>>>>>> 21f3ecedca39f5779f6150d53131e0fed4b54db0

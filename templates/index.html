@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -494,4 +495,160 @@
         }
     </script>
 </body>
+=======
+
+<head>
+    <meta charset="UTF-8">
+    <title>Approximate Query Engine</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6fb;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            padding: 32px 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2d3a4b;
+            margin-bottom: 32px;
+        }
+
+        h2 {
+            color: #4a90e2;
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+
+        form {
+            margin-bottom: 24px;
+        }
+
+        label {
+            font-weight: 500;
+            color: #2d3a4b;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="file"] {
+            width: 100%;
+            padding: 8px 12px;
+            margin: 8px 0 16px 0;
+            border: 1px solid #dbe2ea;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #4a90e2;
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #357ab8;
+        }
+
+        .result {
+            background: #eaf6ff;
+            border-left: 4px solid #4a90e2;
+            padding: 16px;
+            margin-top: 24px;
+            border-radius: 6px;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 16px 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Approximate Query Engine</h1>
+
+        <h2>Upload Database</h2>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".csv">
+            <button type="submit">Upload CSV</button>
+        </form>
+        <div id="uploadStatus"></div>
+
+        <h2>Run Query</h2>
+        <form method="POST" action="/run_query">
+            <label>Database Path:</label>
+            <input type="text" name="db_path" id="dbPath" required>
+
+            <label>Query Type (COUNT, SUM, AVG, GROUP_BY):</label>
+            <input type="text" name="query_type" required>
+
+            <label>Column Name:</label>
+            <input type="text" name="column" required>
+
+            <label>Mode (exact or approximate):</label>
+            <input type="text" name="mode" value="approximate">
+
+            <label>Accuracy (if approximate mode):</label>
+            <input type="number" name="accuracy" step="0.01" min="0.01" max="1" value="0.1">
+
+            <button type="submit">Run Query</button>
+        </form>
+
+        {% if result %}
+        <div class="result">
+            <h2>Query Result</h2>
+            <p><strong>Result:</strong> {{ result['result'] }}</p>
+            <p><strong>Time Taken:</strong> {{ result['time_taken'] }} seconds</p>
+        </div>
+        {% endif %}
+    </div>
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const statusDiv = document.getElementById('uploadStatus');
+            
+            statusDiv.textContent = 'Uploading...';
+            
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    statusDiv.textContent = 'File uploaded successfully!';
+                    // Update the database path input
+                    document.getElementById('dbPath').value = data.filepath;
+                } else {
+                    statusDiv.textContent = data.message || 'Upload failed';
+                }
+            })
+            .catch(error => {
+                statusDiv.textContent = 'Error uploading file';
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+
+>>>>>>> 21f3ecedca39f5779f6150d53131e0fed4b54db0
 </html>

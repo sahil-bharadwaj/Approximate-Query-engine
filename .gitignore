@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 node_modules/
 dist/
 *.log
@@ -56,3 +57,6 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 ehthumbs.db
+=======
+venv
+>>>>>>> 21f3ecedca39f5779f6150d53131e0fed4b54db0
