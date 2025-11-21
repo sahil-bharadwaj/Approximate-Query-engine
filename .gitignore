@@ -1,62 +1,33 @@
-<<<<<<< HEAD
-node_modules/
-dist/
-*.log
-*.tmp
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
+*.egg-info/
+
+# Database files
 *.sqlite
 *.sqlite-shm
 *.sqlite-wal
 *.db
-data/
-.DS_Store
-coverage/
-bin/
-ARCHITECTURE_DOCUMENTATION.*
-IMPLEMENTATION_GUIDE.*
-ML_OPTIMIZATION_DETAILED.*
-simple_debug.*
-stress_test_simple.*
-ml_test_corrected.*
-__pycache__/
-*.pyc
-*.pyo
 
-# Build artifacts
-*.exe
-*.dll
-*.so
-*.dylib
+# Environment
+.env
 
-# Test files, Demo files and temporary docs
-demo_*
-*demo_
-*_demo.*
-*DEMO*
-test_*
-*test_
-*_test.*
-temp_*
-*_temp.*
-*_TEMP.*
-*_FIX.*
-*_STATUS.*
-*_SUMMARY.*
-
-# IDE and editor files
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
-*~
 
-# OS generated files
-Thumbs.db
+# OS
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-=======
-venv
->>>>>>> 21f3ecedca39f5779f6150d53131e0fed4b54db0
+Thumbs.db
+
+# Logs
+*.log
+
+# Docker
+*.tmp
